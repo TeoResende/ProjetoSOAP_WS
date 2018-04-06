@@ -12,7 +12,6 @@ public class Banco {
 		String usuario = "root";
 		String senha = "root";
 		String nomeBanco = "SoapWebService";
-		//String ip = "127.0.0.1";
 		String ip = "189.91.101.54";
 		String porta = "3306";
 		try {
