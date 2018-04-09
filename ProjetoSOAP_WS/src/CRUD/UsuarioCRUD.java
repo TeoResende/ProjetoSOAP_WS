@@ -1,6 +1,7 @@
 package CRUD;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import Banco.Banco;
@@ -53,19 +54,60 @@ public class UsuarioCRUD {
 		return resposta;
 	}
 	
+	public boolean removeUsuario(Usuario remover) {
+		boolean resposta = true;
+		String sql = "DELETE FROM usuarios WHERE idUsuario = ?";
+		try {
+			PreparedStatement stmt = Banco.getConexao().prepareStatement(sql);
+			stmt.setInt(1, remover.getId());
+			resposta = stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return resposta;
+	}
+	
+	public ResultSet selecionaUsuario() {
+		ResultSet dados = null;
+		String sql = "SELECT * FROM usuarios ORDER BY nome";
+		try {
+			PreparedStatement stmt = Banco.getConexao().prepareStatement(sql);
+			dados = stmt.executeQuery();
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return dados;
+	}
+	
+	public ResultSet selecionaUsuario(String x) {
+		ResultSet dados = null;
+		String sql = "SELECT * FROM usuarios LIKE nome = ? ORDER BY nome";
+		try {
+			PreparedStatement stmt = Banco.getConexao().prepareStatement(sql);
+			stmt.setString(1, "%"+x+"%");
+			dados = stmt.executeQuery();
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return dados;
+	}
+	
 	public static void main(String[] args) {
-		Usuario novo = new Usuario();
-		novo.setUsuario("teo");
-		novo.setSenha("minhasenha");
-		novo.setNome("Francisco teófilo de Resende Netto");
-		novo.setSexo("M");
-		novo.setEmail("resendenetto@yahoo.com.br");
-		novo.setNivel(1);
+		Usuario remover = new Usuario();
+		remover.setId(19);
 		
-		if(new UsuarioCRUD().novoUsuario(novo)) {
-			System.out.println("Erro ao cadastrar o novo usuário!");
+		if(new UsuarioCRUD().removeUsuario(remover)) {
+			System.out.println("Erro ao remover o usuário!");
 		}else {
-			System.out.println("novo usuario cadastrado com sucesso!");
+			System.out.println("usuario removido com sucesso!");
 		}
 	}
 
