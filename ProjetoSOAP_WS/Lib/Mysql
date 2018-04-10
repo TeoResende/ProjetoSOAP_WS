@@ -1,1 +1,4 @@
 Driver Mysql
+
+show variables like "max_connections";
+set global max_connections = 200;
