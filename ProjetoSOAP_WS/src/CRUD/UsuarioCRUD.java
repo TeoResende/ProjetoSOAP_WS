@@ -99,16 +99,4 @@ public class UsuarioCRUD {
 		}
 		return dados;
 	}
-	
-	public static void main(String[] args) {
-		Usuario remover = new Usuario();
-		remover.setId(19);
-		
-		if(new UsuarioCRUD().removeUsuario(remover)) {
-			System.out.println("Erro ao remover o usuário!");
-		}else {
-			System.out.println("usuario removido com sucesso!");
-		}
-	}
-
 }
