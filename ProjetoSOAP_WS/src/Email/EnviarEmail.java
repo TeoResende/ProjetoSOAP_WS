@@ -44,6 +44,49 @@ public class EnviarEmail {
 		return nova;
 	}
 	
+	public String enviarEmail(String email) {
+		ResultSet conta = new EnviarEmail().verificaEmail(email);
+		String novaSenha;
+		int idUsuario;
+		try {
+			if(conta.next()) {
+				novaSenha = new EnviarEmail().novaSenha();
+				idUsuario = conta.getInt("idUsuario");
+			}else {
+				return "E-mail invalido!";
+			}
+			
+			if(alteraSenha(idUsuario,novaSenha)) {
+				return "Erro ao alterar a senha no banco de dados";
+			}else {
+				enviarEmail(email,novaSenha);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "E-mail enviado com sucesso!";
+	}
+	
+	public boolean alteraSenha(int id,String senha) {
+		boolean resposta = true;
+		String sql = "UPDATE usuarios SET senha=? WHERE idUsuario = ?";
+		try {
+			PreparedStatement stmt = Banco.getConexao().prepareStatement(sql);
+			stmt.setString(1, senha);
+			stmt.setInt(2, id);
+			resposta = stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resposta;
+	}
+	
+	public void enviarEmail(String email, String senha) {
+		
+	}
 	public static void main(String[] args) {
 		System.out.println(new EnviarEmail().novaSenha());
 	}
