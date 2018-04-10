@@ -86,7 +86,7 @@ public class UsuarioCRUD {
 	
 	public ResultSet selecionaUsuario(String x) {
 		ResultSet dados = null;
-		String sql = "SELECT * FROM usuarios LIKE nome = ? ORDER BY nome";
+		String sql = "SELECT * FROM usuarios WHERE nome like ? ORDER BY nome";
 		try {
 			PreparedStatement stmt = Banco.getConexao().prepareStatement(sql);
 			stmt.setString(1, "%"+x+"%");
