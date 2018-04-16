@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Random;
 
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
+
 import Banco.Banco;
 
 public class EnviarEmail {
@@ -56,10 +59,27 @@ public class EnviarEmail {
 				return "E-mail invalido!";
 			}
 			
-			if(alteraSenha(idUsuario,novaSenha)) {
+			if(alteraSenha(idUsuario,novaSenha)==true) {
 				return "Erro ao alterar a senha no banco de dados";
 			}else {
-				//enviarEmail(email,novaSenha);
+				try {
+					SimpleEmail enviarEmail = new SimpleEmail();
+					enviarEmail.setHostName("smtp.gmail.com");
+					enviarEmail.setSmtpPort(465);
+					enviarEmail.setAuthentication("projetojavasenai", "senai123");
+					enviarEmail.setSSLOnConnect(true);
+					enviarEmail.setFrom("projetojavasenai@gmail.com");
+					enviarEmail.setSubject("Recuperação de senha - SENAI2018");
+					enviarEmail.setMsg("Recuperação de SENHA \n"
+							+ "Sua nova senha é "+novaSenha
+							+ "\n Não responda este E-mail \n"
+							+ "Equipe SENAI 2018");
+					enviarEmail.addTo(email);
+					enviarEmail.send();
+				} catch (EmailException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
