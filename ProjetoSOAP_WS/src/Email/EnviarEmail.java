@@ -59,7 +59,7 @@ public class EnviarEmail {
 			if(alteraSenha(idUsuario,novaSenha)) {
 				return "Erro ao alterar a senha no banco de dados";
 			}else {
-				enviarEmail(email,novaSenha);
+				//enviarEmail(email,novaSenha);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -82,10 +82,6 @@ public class EnviarEmail {
 			e.printStackTrace();
 		}
 		return resposta;
-	}
-	
-	public void enviarEmail(String email, String senha) {
-		
 	}
 	
 	public static void main(String[] args) {
