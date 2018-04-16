@@ -87,6 +87,7 @@ public class EnviarEmail {
 	public void enviarEmail(String email, String senha) {
 		
 	}
+	
 	public static void main(String[] args) {
 		System.out.println(new EnviarEmail().novaSenha());
 	}
