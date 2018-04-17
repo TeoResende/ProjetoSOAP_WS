@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://WebService" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://WebService" xmlns:intf="http://WebService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://WebService" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="testeLogin">
+    <complexType>
+     <sequence>
+      <element name="usuario" type="xsd:string"/>
+      <element name="senha" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="testeLoginResponse">
+    <complexType>
+     <sequence>
+      <element name="testeLoginReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="recuperarSenha">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="recuperarSenhaResponse">
+    <complexType>
+     <sequence>
+      <element name="recuperarSenhaReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="testeLoginResponse">
+
+      <wsdl:part element="impl:testeLoginResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="testeLoginRequest">
+
+      <wsdl:part element="impl:testeLogin" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="recuperarSenhaRequest">
+
+      <wsdl:part element="impl:recuperarSenha" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="recuperarSenhaResponse">
+
+      <wsdl:part element="impl:recuperarSenhaResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="WebService">
+
+      <wsdl:operation name="testeLogin">
+
+         <wsdl:input message="impl:testeLoginRequest" name="testeLoginRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:testeLoginResponse" name="testeLoginResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="recuperarSenha">
+
+         <wsdl:input message="impl:recuperarSenhaRequest" name="recuperarSenhaRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:recuperarSenhaResponse" name="recuperarSenhaResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="WebServiceSoapBinding" type="impl:WebService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="testeLogin">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="testeLoginRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testeLoginResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="recuperarSenha">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="recuperarSenhaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="recuperarSenhaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="WebServiceService">
+
+      <wsdl:port binding="impl:WebServiceSoapBinding" name="WebService">
+
+         <wsdlsoap:address location="http://localhost:8080/ProjetoSOAP_WS/services/WebService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
