@@ -14,8 +14,7 @@ public class EnviarEmail {
 	
 	public ResultSet verificaEmail(String email) {
 		ResultSet emailValido = null;
-		String sql = "SELECT (idUsuario,email)"
-				+ " FROM usuarios WHERE email = ?";
+		String sql = "SELECT * FROM usuarios WHERE email = ?";
 		PreparedStatement stmt;
 		try {
 			stmt = Banco.getConexao().prepareStatement(sql);
@@ -48,7 +47,8 @@ public class EnviarEmail {
 	}
 	
 	public String enviarEmail(String email) {
-		ResultSet conta = new EnviarEmail().verificaEmail(email);
+		ResultSet conta = null;
+		conta = new EnviarEmail().verificaEmail(email);
 		String novaSenha;
 		int idUsuario;
 		try {
@@ -66,7 +66,7 @@ public class EnviarEmail {
 					SimpleEmail enviarEmail = new SimpleEmail();
 					enviarEmail.setHostName("smtp.gmail.com");
 					enviarEmail.setSmtpPort(465);
-					enviarEmail.setAuthentication("projetojavasenai", "senai123");
+					enviarEmail.setAuthentication("projetojavasenai@gmail.com", "senai123");
 					enviarEmail.setSSLOnConnect(true);
 					enviarEmail.setFrom("projetojavasenai@gmail.com");
 					enviarEmail.setSubject("Recuperação de senha - SENAI2018");
@@ -104,7 +104,4 @@ public class EnviarEmail {
 		return resposta;
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(new EnviarEmail().novaSenha());
-	}
 }
